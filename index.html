@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I wanna see cats</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <img src="" id="catImageElement" />
+  </body>
+
+  <script>
+    const apiKey =
+      "live_6RsCjoJjvfzq4z0nFlGsXftSSYeHXx2w9FXcD2eJO8qedvlu1yOIOMGB13rAeorS";
+    const url = "https://api.thecatapi.com/v1/images/search";
+
+    const headers = {
+      "x-api-key": apiKey,
+    };
+
+    axios
+      .get(url, { headers })
+      .then((response) => {
+        const catImageUrl = response.data[0].url;
+
+        const catImageElement = document.createElement("img");
+        catImageElement.src = catImageUrl;
+        document.body.appendChild(catImageElement);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  </script>
+</html>
